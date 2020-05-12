@@ -1,0 +1,17 @@
+{
+  "serviceId": "3c.park.queryparkspace",
+  "resultCode": 0,
+  "message": "³É¹¦",
+  "dataItems": [
+    {
+      "objectId": "",
+      "operateType": "READ",
+      "attributes": {
+        "parkCode": "park01",
+        "parkName": "KKMALL_PARK",
+        "totalSpace": 100,
+        "restSpace": 92
+      }
+    }
+  ]
+}
