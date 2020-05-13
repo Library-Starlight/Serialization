@@ -18,7 +18,7 @@ namespace JsonSerialization
         public string objectId { get; set; }
 
         /// <summary>
-        /// 子对象操作类型
+        /// 子对象操作类型，固定值传入：READ
         /// </summary>
         public string operateType { get; set; }
 

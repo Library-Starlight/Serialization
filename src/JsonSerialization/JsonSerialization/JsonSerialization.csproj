@@ -75,11 +75,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="JsonConverters\StandardDateConverter.cs" />
+    <Compile Include="JsonConverters\StandardDateTimeConverter.cs" />
     <Compile Include="Model\NestedModel\Base\JhtCloudRequest.cs" />
     <Compile Include="Model\NestedModel\Base\JhtCloudResponse.cs" />
     <Compile Include="Model\NestedModel\Base\JhtCloudResponseItem.cs" />
-    <Compile Include="Model\NestedModel\Interface\ParkingSpaceRequest.cs" />
-    <Compile Include="Model\NestedModel\Interface\ParkingSpaceResponse.cs" />
+    <Compile Include="Model\NestedModel\Interface\Advance\VehicleEntryRecordRequest.cs" />
+    <Compile Include="Model\NestedModel\Interface\Advance\VehicleEntryRecordResponse.cs" />
+    <Compile Include="Model\NestedModel\Interface\QueryCurrentParkTraffic.cs" />
+    <Compile Include="Model\NestedModel\Interface\QueryCurrentParkTrafficResponse.cs" />
+    <Compile Include="Model\NestedModel\Interface\QueryParkIn.cs" />
+    <Compile Include="Model\NestedModel\Interface\QueryParkInResponse.cs" />
+    <Compile Include="Model\NestedModel\Interface\QueryParkOut.cs" />
+    <Compile Include="Model\NestedModel\Interface\QueryParkOutResponse.cs" />
+    <Compile Include="Model\NestedModel\Interface\QueryParkSpace.cs" />
+    <Compile Include="Model\NestedModel\Interface\QueryParkSpaceResponse.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

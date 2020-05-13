@@ -9,7 +9,7 @@ namespace JsonSerialization
     /// <summary>
     /// 空车位查询请求
     /// </summary>
-    public class ParkingSpaceRequest : JhtCloudRequest
+    public class QueryParkSpace : JhtCloudRequest
     {
         /// <summary>
         /// 停车场编号,多个编号之间以逗号（“,”）分隔

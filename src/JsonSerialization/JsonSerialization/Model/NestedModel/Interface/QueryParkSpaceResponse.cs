@@ -9,7 +9,7 @@ namespace JsonSerialization
     /// <summary>
     /// 空车位查询应答
     /// </summary>
-    public class ParkingSpaceResponse : JhtCloudResponse
+    public class QueryParkSpaceResponse : JhtCloudResponse
     {
         /// <summary>
         /// 停车场编号

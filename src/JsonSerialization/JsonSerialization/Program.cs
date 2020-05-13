@@ -21,15 +21,13 @@ namespace JsonSerialization
         /// </summary>
         private static void SerializeNestGenericModel()
         {
-            var requestBody = new ParkingSpaceRequest()
+            var requestBody = new QueryParkSpace()
             {
                 parkCodes = "100501",
             };
 
-            var request = new JhtCloudRequest<ParkingSpaceRequest>()
+            var request = new JhtCloudRequest<QueryParkSpace>()
             {
-                serviceId = "S1054",
-                requestType = "DATA",
                 attributes = requestBody,
             };
 
@@ -38,7 +36,7 @@ namespace JsonSerialization
             Console.WriteLine(json);
 
             // 反序列化
-            request = JsonConvert.DeserializeObject<JhtCloudRequest<ParkingSpaceRequest>>(json);
+            request = JsonConvert.DeserializeObject<JhtCloudRequest<QueryParkSpace>>(json);
 
             Console.WriteLine($"serviceId: {request.serviceId}");
             Console.WriteLine($"requestType: {request.requestType}");
@@ -54,7 +52,7 @@ namespace JsonSerialization
             using (var sr = new StreamReader(fs, Encoding.GetEncoding("GBK")))
             {
                 var json = sr.ReadToEnd();
-                var response = JsonConvert.DeserializeObject<JhtCloudResponse<ParkingSpaceResponse>>(json);
+                var response = JsonConvert.DeserializeObject<JhtCloudResponse<QueryParkSpaceResponse>>(json);
 
                 Console.WriteLine(response.resultCode);
                 Console.WriteLine(response.message);
