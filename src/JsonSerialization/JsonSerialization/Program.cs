@@ -43,6 +43,10 @@ namespace JsonSerialization
 
                 Console.WriteLine($"dataItems[0]：{jObj["dataItems"][0]}");
                 Console.WriteLine($"dataItems[0].objectId：{jObj["dataItems"][0]["operateType"]}");
+
+                var wrongNode = jObj["fsdaad"];
+                Console.WriteLine(wrongNode == null);
+                Console.WriteLine(wrongNode.ToString());
             }
         }
 
