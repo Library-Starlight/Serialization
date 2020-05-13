@@ -12,8 +12,23 @@ namespace JsonSerialization
     {
         static void Main(string[] args)
         {
-            SerializeNestGenericModel();
-            DeserializeNestGenericModel();
+            SerializeDateTimeInSpecificFormat();
+
+            Console.ReadLine();
+        }
+
+        private static async void SerializeDateTimeInSpecificFormat()
+        {
+            using (var fs = new FileStream("Text/GarabageBinStatus.json", FileMode.Open, FileAccess.Read))
+            using (var sr = new StreamReader(fs))
+            {
+                var json = await sr.ReadToEndAsync();
+
+                var status = JsonConvert.DeserializeObject<GarbageBinStatus>(json);
+
+                json = JsonConvert.SerializeObject(status);
+                Console.WriteLine(json);
+            }
         }
 
         /// <summary>

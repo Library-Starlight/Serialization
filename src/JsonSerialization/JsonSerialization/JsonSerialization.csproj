@@ -77,6 +77,8 @@
   <ItemGroup>
     <Compile Include="JsonConverters\StandardDateConverter.cs" />
     <Compile Include="JsonConverters\StandardDateTimeConverter.cs" />
+    <Compile Include="JsonConverters\NoDelimiterDateTimeConverter.cs" />
+    <Compile Include="Model\Njhm\GarbageBinStatus.cs" />
     <Compile Include="Model\NestedModel\Base\JhtCloudRequest.cs" />
     <Compile Include="Model\NestedModel\Base\JhtCloudResponse.cs" />
     <Compile Include="Model\NestedModel\Base\JhtCloudResponseItem.cs" />
@@ -96,6 +98,12 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Text\GarabageBinResponse.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Text\GarabageBinStatus.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Text\PackingSpaceResponse.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

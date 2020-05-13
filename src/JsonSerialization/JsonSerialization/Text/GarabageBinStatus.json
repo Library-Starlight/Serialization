@@ -1,0 +1,13 @@
+{
+  "id": "258912e6a57847b4955d5505da972643",
+  "cmd": "sendGarbagebinStatuInfo",
+  "deviceID": "869405031944656",
+  "version": "1.0",
+  "time": "20130328151727",
+  "data": {
+    "rssi": -8,
+    "full": 0,
+    "distance": 0,
+    "battary": 100
+  }
+}
