@@ -14,10 +14,19 @@ namespace JsonSerialization
     {
         static void Main(string[] args)
         {
-            ReadNodeValue();
+            StringToEnumConvert();
 
             Console.ReadLine();
         }
+
+        #region 字符串枚举转换
+
+        private static void StringToEnumConvert()
+        {
+            PrintObject<SampleEnumClass>();
+        }
+
+        #endregion
 
         #region 读取节点值
 
@@ -114,6 +123,22 @@ namespace JsonSerialization
                 Console.WriteLine(response.message);
                 Console.WriteLine(response.dataItems.First().attributes.restSpace);
                 Console.WriteLine(response.dataItems.First().attributes.totalSpace);
+            }
+        }
+
+        #endregion
+
+        #region 工具方法
+
+        private static async void PrintObject<T>()
+        {
+            using (var fs = new FileStream($"Text/{typeof(T).Name}.json", FileMode.Open, FileAccess.Read))
+            using (var sr = new StreamReader(fs))
+            {
+                var json = await sr.ReadToEndAsync();
+                var obj = JsonConvert.DeserializeObject<T>(json);
+
+                Console.WriteLine(JsonConvert.SerializeObject(obj, Formatting.None));
             }
         }
 

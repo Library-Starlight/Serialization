@@ -92,6 +92,7 @@
     <Compile Include="Model\NestedModel\Interface\QueryParkOutResponse.cs" />
     <Compile Include="Model\NestedModel\Interface\QueryParkSpace.cs" />
     <Compile Include="Model\NestedModel\Interface\QueryParkSpaceResponse.cs" />
+    <Compile Include="Model\SampleEnumClass.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -105,6 +106,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Text\PackingSpaceResponse.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Text\SampleEnumClass.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
