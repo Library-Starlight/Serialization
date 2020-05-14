@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace JsonSerialization
 {
     /// <summary>
-    /// 将<see cref="DateTime"/>转化为yyyy-MM-dd HH:mm:ss格式的字符串
+    /// 将<see cref="DateTime"/>转化为yyyyMMddHHmmss格式的字符串
     /// </summary>
     public class NoDelimiterDateTimeConverter : DateTimeConverterBase
     {
