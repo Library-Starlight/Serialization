@@ -1,0 +1,21 @@
+{
+  "total": 31,
+  "rows": [
+    {
+      "devImei": "865439030684512",
+      "devType": 1,
+      "stationName": "武进测试站点",
+      "stationId": 3686,
+      "mchName": "yanshi",
+      "logStatus": 0,
+      "onenetDevId": 597409924,
+      "addDate": "May 14, 2020",
+      "online": "失联",
+      "self": 1,
+      "deviceHardwareType": "未知类型",
+      "province": "875",
+      "city": "911",
+      "district": "917"
+    }
+  ]
+}

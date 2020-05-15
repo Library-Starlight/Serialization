@@ -75,9 +75,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="JsonConverters\EnglishDateConverter.cs" />
+    <Compile Include="JsonConverters\EnumJsonConvert.cs" />
     <Compile Include="JsonConverters\StandardDateConverter.cs" />
     <Compile Include="JsonConverters\StandardDateTimeConverter.cs" />
     <Compile Include="JsonConverters\NoDelimiterDateTimeConverter.cs" />
+    <Compile Include="Model\HycCharge\Enums\HycDeviceType.cs" />
+    <Compile Include="Model\HycCharge\Enums\HycGetDevicesResponse.cs" />
+    <Compile Include="Model\HycCharge\Enums\HycOnlineStatus.cs" />
+    <Compile Include="Model\HycCharge\Enums\HycOperationStatus.cs" />
+    <Compile Include="Model\HycCharge\Enums\HycPlugStatus.cs" />
+    <Compile Include="Model\HycCharge\Enums\HycResultCode.cs" />
+    <Compile Include="Model\HycCharge\HycDevice.cs" />
+    <Compile Include="Model\HycCharge\Request\HycGetDevices.cs" />
+    <Compile Include="Model\HycCharge\Request\HycLogin.cs" />
+    <Compile Include="Model\HycCharge\Response\HycLoginResponse.cs" />
+    <Compile Include="Model\HycCharge\Response\HycSearchTaskResultResponse.cs" />
     <Compile Include="Model\Njhm\GarbageBinStatus.cs" />
     <Compile Include="Model\NestedModel\Base\JhtCloudRequest.cs" />
     <Compile Include="Model\NestedModel\Base\JhtCloudResponse.cs" />
@@ -95,20 +108,34 @@
     <Compile Include="Model\SampleEnumClass.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="Text\HycSearchTaskResultResponse.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <Compile Include="Model\Times.cs" />
     <None Include="packages.config" />
     <None Include="Text\GarabageBinResponse.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Text\GarabageBinStatus.json">
+    <None Include="Text\GarbageBinStatus.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Text\HycTaskResultData.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Text\HycTaskResultData_Correct.json" />
+    <None Include="Text\HycTaskResultRow.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Text\PackingSpaceResponse.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Text\SampleEnumClass.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Text\Times.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
@@ -125,4 +152,5 @@
     </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <ProjectExtensions />
 </Project>

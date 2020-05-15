@@ -14,10 +14,29 @@ namespace JsonSerialization
     {
         static void Main(string[] args)
         {
-            StringToEnumConvert();
+            SerializeEnglishDate();
 
             Console.ReadLine();
         }
+
+        #region 自定义时间转换
+
+        private static void CustomDateTimeConverter()
+        {
+            PrintObject<Times>();
+            PrintObject<HycTaskResultRow>();
+            return;
+
+            var times = new Times();
+            var json = JsonConvert.SerializeObject(times, Formatting.Indented);
+
+            times = JsonConvert.DeserializeObject<Times>(json);
+
+            Console.WriteLine(times.Fotmatter);
+            Console.WriteLine(json);
+        }
+
+        #endregion
 
         #region 字符串枚举转换
 
@@ -63,18 +82,19 @@ namespace JsonSerialization
 
         #region 将时间序列化为指定格式
 
+        private static void SerializeEnglishDate()
+        {
+            var iso = DateFormatHandling.IsoDateFormat;
+            var msc = DateFormatHandling.MicrosoftDateFormat;
+
+            //PrintObject<HycSearchTaskResultResponse>();
+
+            PrintObject<HycTaskResultData>();
+        }
+
         private static async void SerializeDateTimeInSpecificFormat()
         {
-            using (var fs = new FileStream("Text/GarabageBinStatus.json", FileMode.Open, FileAccess.Read))
-            using (var sr = new StreamReader(fs))
-            {
-                var json = await sr.ReadToEndAsync();
-
-                var status = JsonConvert.DeserializeObject<GarbageBinStatus>(json);
-
-                json = JsonConvert.SerializeObject(status);
-                Console.WriteLine(json);
-            }
+            PrintObject<GarbageBinStatus>();
         }
 
         #endregion
@@ -133,12 +153,14 @@ namespace JsonSerialization
         private static async void PrintObject<T>()
         {
             using (var fs = new FileStream($"Text/{typeof(T).Name}.json", FileMode.Open, FileAccess.Read))
-            using (var sr = new StreamReader(fs))
+            using (var sr = new StreamReader(fs, Encoding.GetEncoding("GBK")))
             {
+                var settings = new JsonSerializerSettings() { Culture = new System.Globalization.CultureInfo("zh-cn") };
+
                 var json = await sr.ReadToEndAsync();
                 var obj = JsonConvert.DeserializeObject<T>(json);
 
-                Console.WriteLine(JsonConvert.SerializeObject(obj, Formatting.None));
+                Console.WriteLine(JsonConvert.SerializeObject(obj, Formatting.Indented));
             }
         }
 
