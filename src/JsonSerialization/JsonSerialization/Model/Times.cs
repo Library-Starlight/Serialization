@@ -1,3 +1,4 @@
+using JsonSerialization.JsonConverters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
@@ -16,5 +17,8 @@ namespace JsonSerialization
 
         [JsonConverter(typeof(EnglishDateConverter))]
         public DateTime Fotmatter { get; set; } = DateTime.Now.AddMonths(-10);
+
+        [JsonConverter(typeof(UtcDateTimeConverter))]
+        public DateTime UtcTime { get; set; } = DateTime.Now;
     }
 }

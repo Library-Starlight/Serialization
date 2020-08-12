@@ -14,7 +14,7 @@ namespace JsonSerialization
     {
         static void Main(string[] args)
         {
-            SerializeEnglishDate();
+            CustomDateTimeConverter();
 
             Console.ReadLine();
         }
@@ -24,7 +24,7 @@ namespace JsonSerialization
         private static void CustomDateTimeConverter()
         {
             PrintObject<Times>();
-            PrintObject<HycTaskResultRow>();
+            //PrintObject<HycTaskResultRow>();
             return;
 
             var times = new Times();
