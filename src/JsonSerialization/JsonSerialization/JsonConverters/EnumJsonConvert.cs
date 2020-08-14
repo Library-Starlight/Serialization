@@ -9,7 +9,7 @@ namespace JsonSerialization
     /// 将枚举项为中文的枚举类型转换为Json
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class EnumJsonConvert<T> : JsonConverter where T : struct, IConvertible
+    public class EnumJsonConvert : JsonConverter
     {
         public override bool CanConvert(Type objectType)
         {

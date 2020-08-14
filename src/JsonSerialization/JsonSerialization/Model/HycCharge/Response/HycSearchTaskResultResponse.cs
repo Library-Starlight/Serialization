@@ -54,7 +54,7 @@ namespace JsonSerialization
         [JsonConverter(typeof(EnglishDateConverter))]
         public DateTime addDate { get; set; }
         public string onenetDevId { get; set; }
-        [JsonConverter(typeof(EnumJsonConvert<HycOnlineStatus>))]
+        [JsonConverter(typeof(EnumJsonConvert))]
         public HycOnlineStatus online { get; set; }
         public HycPlug[] plugs { get; set; }
     }

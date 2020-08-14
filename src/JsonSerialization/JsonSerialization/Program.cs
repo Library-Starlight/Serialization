@@ -14,10 +14,23 @@ namespace JsonSerialization
     {
         static void Main(string[] args)
         {
-            CustomDateTimeConverter();
+            ParseFromString();
 
             Console.ReadLine();
         }
+
+        #region 从字符串解析
+
+        static void ParseFromString()
+        {
+            var s = "{\"longitude\":\"119.272696\",\"latitude\":\"26.128918\",\"province\":\"\",\"city\":\"\",\"district\":\"\",\"street\":\"\",\"streetNumber\":\"\",\"address\":\"\",\"addressDetail\":\"福建省福州市晋安区G1501(福州绕城高速)\"}";
+
+            var jObj = JObject.Parse(s);
+
+            Console.WriteLine(jObj["addressDetail"]);
+        }
+
+        #endregion
 
         #region 自定义时间转换
 
