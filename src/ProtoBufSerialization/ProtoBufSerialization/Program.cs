@@ -3,6 +3,7 @@ using ProtoBuf;
 using ProtoBuf.Meta;
 using System;
 using System.IO;
+using System.Runtime.CompilerServices;
 
 namespace ProtoBufSerialization
 {
@@ -30,6 +31,91 @@ namespace ProtoBufSerialization
     class Program
     {
         static void Main(string[] args)
+        {
+            var typeModel = RuntimeTypeModel.Create();
+
+            var ms = new MemoryStream();
+            var writer = ProtoWriter.State.Create(ms, typeModel);
+
+            // Int - 5, 500
+            writer.WriteFieldHeader(5, WireType.Varint);
+            writer.WriteInt32(500);
+            writer.Flush();
+            ms.Position = 0;
+            var data = ms.ToArray();
+            ms.Close();
+            ms.Dispose();
+            ms = null;
+            Print(1);
+
+            var value1 = new ValueDemo() { Value = 500 };
+            data = ProtoBufSerializer.Serialize(value1);
+            Print(2);
+
+            data = ProtoBufHelper.GetData(500, "int32", 5);
+            Print(3);
+
+            // UInt32 - 4, Uint.MaxValue
+            ms = new MemoryStream();
+            writer = ProtoWriter.State.Create(ms, typeModel);
+            writer.WriteFieldHeader(4, WireType.Varint);
+            writer.WriteUInt32(uint.MaxValue);
+            writer.Flush();
+            ms.Position = 0;
+            data = ms.ToArray();
+            ms.Close();
+            ms.Dispose();
+            ms = null;
+            Print(4);
+
+            value1 = new ValueDemo() { Values = UInt32.MaxValue };
+            data = ProtoBufSerializer.Serialize(value1);
+            Print(5);
+
+            data = ProtoBufHelper.GetData(UInt32.MaxValue, "uint32", 4);
+            Print(6);
+
+            // Boolean, 300 - true
+            ms = new MemoryStream();
+            writer = ProtoWriter.State.Create(ms, typeModel);
+            writer.WriteFieldHeader(3, WireType.Varint);
+            writer.WriteBoolean(true);
+            writer.Flush();
+            ms.Position = 0;
+            data = ms.ToArray();
+            ms.Close();
+            ms.Dispose();
+            ms = null;
+            Print(7);
+
+            value1 = new ValueDemo { Success = true };
+            data = ProtoBufSerializer.Serialize(value1);
+            Print(8);
+
+            data = ProtoBufHelper.GetData(true, "bool", 3);
+            Print(9);
+
+            void Print(int i)
+            {
+                Console.WriteLine($"{i}: {BitConverter.ToString(data)}");
+            }
+        }
+
+        [ProtoContract]
+        public class ValueDemo
+        {
+            [ProtoMember(3)]
+            public bool Success { get; set; }
+
+            [ProtoMember(4)]
+            public uint Values { get; set; }
+
+            [ProtoMember(5)]
+            public int Value { get; set; }
+        }
+
+
+        static void Test()
         {
             Console.WriteLine($"Begin");
 
