@@ -30,6 +30,19 @@ namespace ProtoBufSerialization_224
         public int V5 { get; set; }
     }
 
+    [ProtoContract]
+    public class ValueDemo
+    {
+        [ProtoMember(3)]
+        public bool Success { get; set; }
+
+        [ProtoMember(4)]
+        public uint Values { get; set; }
+
+        [ProtoMember(5)]
+        public int Value { get; set; }
+    }
+
     class Program
     {
         static void Main(string[] args)
@@ -38,7 +51,7 @@ namespace ProtoBufSerialization_224
             Console.WriteLine();
 
             byte[] data;
-            DemoModel model;
+            ValueDemo model;
             byte[] data1;
             MemoryStream ms;
             ProtoWriter writestate;
@@ -47,13 +60,13 @@ namespace ProtoBufSerialization_224
             // Bool
             ms = new MemoryStream();
             writestate = ProtoBuf.ProtoWriter.Create(ms, typeModel);
-            ProtoWriter.WriteFieldHeader(4, WireType.Variant, writestate);
+            ProtoWriter.WriteFieldHeader(3, WireType.Variant, writestate);
             ProtoWriter.WriteBoolean(true, writestate);
             writestate.Close();
             ms.Position = 0;
 
             data = ms.ToArray();
-            model = new DemoModel { Result = true };
+            model = new ValueDemo { Success = true };
             data1 = ProtoBufSerializer.Serialize(model);
             ms.Close();
             ms = null;
@@ -64,12 +77,12 @@ namespace ProtoBufSerialization_224
             ms = new MemoryStream();
             writestate = ProtoBuf.ProtoWriter.Create(ms, typeModel);
             ProtoWriter.WriteFieldHeader(5, WireType.Variant, writestate);
-            ProtoWriter.WriteInt32(300, writestate);
+            ProtoWriter.WriteInt32(500, writestate);
             writestate.Close();
             ms.Position = 0;
 
             data = ms.ToArray();
-            model = new DemoModel { V5 = 300 };
+            model = new ValueDemo { Value = 500 };
             data1 = ProtoBufSerializer.Serialize(model);
             ms.Close();
             ms = null;
@@ -79,13 +92,13 @@ namespace ProtoBufSerialization_224
             // Uint32
             ms = new MemoryStream();
             writestate = ProtoBuf.ProtoWriter.Create(ms, typeModel);
-            ProtoWriter.WriteFieldHeader(3, WireType.Variant, writestate);
-            ProtoWriter.WriteUInt32(12345, writestate);
+            ProtoWriter.WriteFieldHeader(4, WireType.Variant, writestate);
+            ProtoWriter.WriteUInt32(UInt32.MaxValue, writestate);
             writestate.Close();
             ms.Position = 0;
 
             data = ms.ToArray();
-            model = new DemoModel { V1 = 12345 };
+            model = new ValueDemo { Values = UInt32.MaxValue };
             data1 = ProtoBufSerializer.Serialize(model);
             ms.Close();
             ms = null;
