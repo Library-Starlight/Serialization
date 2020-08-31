@@ -127,5 +127,31 @@ namespace ProtoBufSerialization
 
             return data;
         }
+
+        /// <summary>
+        /// 获取数据
+        /// </summary>
+        /// <param name="value">值</param>
+        /// <param name="order">序号</param>
+        /// <returns></returns>
+        public static byte[] GetData(string value, int order)
+        {
+            using (var ms = new MemoryStream())
+            {
+                var writer = ProtoWriter.State.Create(ms, _typeModel);
+
+                // 写入数据
+                writer.WriteFieldHeader(order, WireType.String);
+                writer.WriteString(value);
+
+                // 释放缓冲区
+                writer.Flush();
+
+                ms.Position = 0;
+                var data = ms.ToArray();
+
+                return data;
+            }
+        }
     }
 }

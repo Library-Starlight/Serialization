@@ -16,6 +16,7 @@ namespace ProtoBufSerialization
             Int32 = 1,
             Uint32 = 2,
             Bool = 3,
+            String = 4,
         }
 
         /// <summary>
@@ -43,6 +44,8 @@ namespace ProtoBufSerialization
                     return FromUint32(value, order);
                 case DataType.Bool:
                     return FromBool(value, order);
+                case DataType.String:
+                    return FromString(value, order);
                 default:
                     return null;
             }
@@ -67,6 +70,12 @@ namespace ProtoBufSerialization
             if (value is bool b || bool.TryParse(value.ToString(), out b))
                 return ProtoBufSerializer.GetData(b, order);
             return null;
+        }
+
+        private static byte[] FromString(object value, int order)
+        {
+            var s = value.ToString();
+            return ProtoBufSerializer.GetData(s, order);
         }
     }
 

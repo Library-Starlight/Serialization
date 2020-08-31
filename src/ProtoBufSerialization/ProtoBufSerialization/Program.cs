@@ -26,6 +26,8 @@ namespace ProtoBufSerialization
         public uint V1 { get; set; }
         [ProtoMember(4)]
         public bool Result { get; set; }
+        [ProtoMember(5)]
+        public string Str { get; set; }
     }
 
     class Program
@@ -95,6 +97,27 @@ namespace ProtoBufSerialization
             data = ProtoBufHelper.GetData(true, "bool", 3);
             Print(9);
 
+            // String
+            var s = "Hello World!哈罗！";
+            ms = new MemoryStream();
+            writer = ProtoWriter.State.Create(ms, typeModel);
+            writer.WriteFieldHeader(6, WireType.String);
+            writer.WriteString(s);
+            writer.Flush();
+            ms.Position = 0;
+            data = ms.ToArray();
+            ms.Close();
+            ms.Dispose();
+            ms = null;
+            Print(10);
+
+            value1 = new ValueDemo { Str = s };
+            data = ProtoBufSerializer.Serialize(value1);
+            Print(11);
+
+            data = ProtoBufHelper.GetData(s, "string", 6);
+            Print(12);
+
             void Print(int i)
             {
                 Console.WriteLine($"{i}: {BitConverter.ToString(data)}");
@@ -112,6 +135,9 @@ namespace ProtoBufSerialization
 
             [ProtoMember(5)]
             public int Value { get; set; }
+
+            [ProtoMember(6)]
+            public string Str { get; set; }
         }
 
 
