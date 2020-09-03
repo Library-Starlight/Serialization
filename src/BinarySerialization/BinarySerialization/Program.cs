@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿#define FS
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,30 +12,29 @@ namespace BinarySerialization
         static void Main(string[] args)
         {
             var list = new List<int> { 1, 2, 3, 4, 5 };
-            var data = Serialize(list);
+            var stream = Serialize(list);
 
-            Console.WriteLine(BitConverter.ToString(data));
-            Console.WriteLine();
-
-            var clone = Deserialize<List<int>>(data);
+            var clone = Deserialize<List<int>>(stream);
             Console.WriteLine(JsonConvert.SerializeObject(clone));
         }
 
-        private static byte[] Serialize(object obj)
+        private static Stream Serialize(object obj)
         {
             var formatter = new BinaryFormatter();
+#if FS
+            var stream = new FileStream("model.dat", FileMode.Create, FileAccess.ReadWrite);
+#else
             var stream = new MemoryStream();
+#endif
             formatter.Serialize(stream, obj);
 
             stream.Position = 0;
-
-            return stream.ToArray();
+            return stream;
         }
 
-        private static T Deserialize<T>(byte[] data)
+        private static T Deserialize<T>(Stream stream)
         {
             var formatter = new BinaryFormatter();
-            var stream = new MemoryStream(data);
             return (T)formatter.Deserialize(stream);
         }
     }
