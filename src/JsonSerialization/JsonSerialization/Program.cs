@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using JsonSerialization.Model;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -14,10 +15,35 @@ namespace JsonSerialization
     {
         static void Main(string[] args)
         {
-            ParseFromString();
+            SpecialNodeNameSerialization();
 
             Console.ReadLine();
         }
+
+        #region 特殊节点名序列化
+
+        /// <summary>
+        /// 特殊节点名序列化
+        /// </summary>
+        static void SpecialNodeNameSerialization()
+        {
+            var model = new TradeTrendModel()
+            {
+                value = new TradeTrendItemModel
+                {
+                    avgProcessTime = new List<int> { 1, 2, 3 },
+                    avgStatus = new List<double> { 60.1, 70.5, 80.0 },
+                    count = new List<int> { 845, 960, 632 },
+                    time = new List<string> { "2017090600", "2017090601", "2017090602" },
+                },
+            };
+
+            var json = JsonConvert.SerializeObject(model);
+
+            Console.WriteLine(json);
+        }
+
+        #endregion
 
         #region 从字符串解析
 

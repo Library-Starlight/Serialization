@@ -118,6 +118,27 @@ namespace ProtoBufSerialization
             data = ProtoBufHelper.GetData(s, "string", 6);
             Print(12);
 
+            // double
+            var d = 105.5D;
+            ms = new MemoryStream();
+            writer = ProtoWriter.State.Create(ms, typeModel);
+            writer.WriteFieldHeader(7, WireType.Varint);
+            writer.WriteDouble(d);
+            writer.Flush();
+            ms.Position = 0;
+            data = ms.ToArray();
+            ms.Close();
+            ms.Dispose();
+            ms = null;
+            Print(13);
+
+            value1 = new ValueDemo { Measure = d };
+            data = ProtoBufSerializer.Serialize(value1);
+            Print(14);
+
+            data = ProtoBufHelper.GetData(s, "double", 7);
+            Print(15);
+
             void Print(int i)
             {
                 Console.WriteLine($"{i}: {BitConverter.ToString(data)}");
@@ -138,6 +159,8 @@ namespace ProtoBufSerialization
 
             [ProtoMember(6)]
             public string Str { get; set; }
+            [ProtoMember(7)]
+            public double Measure { get; set; }
         }
 
 
