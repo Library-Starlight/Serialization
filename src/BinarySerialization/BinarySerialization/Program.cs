@@ -35,7 +35,8 @@ namespace BinarySerialization
         private static T Deserialize<T>(Stream stream)
         {
             var formatter = new BinaryFormatter();
-            return (T)formatter.Deserialize(stream);
+            var obj = formatter.Deserialize(stream);
+            return (T)obj;
         }
     }
 }
