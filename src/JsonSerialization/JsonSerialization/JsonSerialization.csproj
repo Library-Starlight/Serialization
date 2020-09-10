@@ -108,6 +108,7 @@
     <Compile Include="Model\NestedModel\Interface\QueryParkSpace.cs" />
     <Compile Include="Model\NestedModel\Interface\QueryParkSpaceResponse.cs" />
     <Compile Include="Model\SampleEnumClass.cs" />
+    <Compile Include="Model\Settings.cs" />
     <Compile Include="Model\TradeTrendModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

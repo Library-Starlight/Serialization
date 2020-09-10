@@ -34,6 +34,26 @@ namespace ProtoBufSerialization
     {
         static void Main(string[] args)
         {
+            Read();
+        }
+
+        static void Read()
+        {
+            var data = FromBool(1, 10);
+            Print();
+            data = FromBool(0, 10);
+            Print();
+
+            //GetUInt32ofPB(7, 96);
+
+            void Print()
+            {
+                Console.WriteLine(BitConverter.ToString(data));
+            }
+        }
+
+        static void MemoryWriter()
+        {
             var typeModel = RuntimeTypeModel.Create();
 
             var ms = new MemoryStream();
@@ -143,6 +163,98 @@ namespace ProtoBufSerialization
             {
                 Console.WriteLine($"{i}: {BitConverter.ToString(data)}");
             }
+        }
+
+        private static void GetUInt32ofPB(int order, uint value)
+        {
+            var data1 = FromUint32(19.1D, -1, 7);
+            Console.WriteLine(BitConverter.ToString(data1));
+            return;
+
+            // [2020-09-07 02:10:36] 上传属性，属性值: 9.6, 属性名: 目标湿度, 设备号: 53, 测点号: 18, 测点类型: C
+            // [2020-09-07 02:10:36] 上传属性, 结果: 成功(0), homeaddr: 389, 服务Id: 260608, iid: 7, 属性二进制值: 0x3809
+            // [2020-09-07 02:52:48] 上传属性，属性值: 12, 属性名: 当前湿度, 设备号: 53, 测点号: 14, 测点类型: C
+            // [2020-09-07 02:52:48] 上传属性, 结果: 成功(0), homeaddr: 390, 服务Id: 260352, iid: 7, 属性二进制值: 0x3800
+            // [2020-09-07 02:52:48] 上传属性，属性值: 15.1, 属性名: 当前湿度, 设备号: 53, 测点号: 17, 测点类型: C
+            // [2020-09-07 02:52:48] 上传属性, 结果: 成功(0), homeaddr: 390, 服务Id: 260608, iid: 6, 属性二进制值: 0x3000
+            // [2020-09-07 02:52:48] 上传属性，属性值: 19.1, 属性名: 目标湿度, 设备号: 53, 测点号: 18, 测点类型: C
+            // [2020-09-07 02:52:48] 上传属性, 结果: 成功(0), homeaddr: 390, 服务Id: 260608, iid: 7, 属性二进制值: 0x3800
+            // [2020-09-07 02:52:48] 上传属性，属性值: 16.4, 属性名: 目标湿度, 设备号: 53, 测点号: 22, 测点类型: C
+            // [2020-09-07 02:52:48] 上传属性, 结果: 成功(0), homeaddr: 390, 服务Id: 256512, iid: 12, 属性二进制值: 0x6000
+            // [2020-09-07 02:52:48] 上传属性，属性值: 7, 属性名: 频率控制, 设备号: 53, 测点号: 31, 测点类型: C
+            // [2020-09-07 02:52:48] 上传属性, 结果: 成功(0), homeaddr: 390, 服务Id: 256512, iid: 7, 属性二进制值: 0x3800
+            // [2020-09-07 02:52:48] 上传属性，属性值: 17.5, 属性名: 频率反馈, 设备号: 53, 测点号: 32, 测点类型: C
+            // [2020-09-07 02:52:48] 上传属性, 结果: 成功(0), homeaddr: 390, 服务Id: 256512, iid: 8, 属性二进制值: 0x4000
+            // [2020-09-07 02:52:48] 上传属性，属性值: False, 属性名: 故障状态, 设备号: 53, 测点号: 28, 测点类型: X
+            // [2020-09-07 02:52:48] 上传属性, 结果: 成功(0), homeaddr: 390, 服务Id: 256512, iid: 3, 属性二进制值: 0x1800
+            // [2020-09-07 02:52:48] 上传属性，属性值: False, 属性名: 中效滤网状态, 设备号: 53, 测点号: 5, 测点类型: X
+            // [2020-09-07 02:52:48] 上传属性, 结果: 成功(0), homeaddr: 390, 服务Id: 256768, iid: 2, 属性二进制值: 0x1000
+
+            var typeModel = RuntimeTypeModel.Create();
+            var ms = new MemoryStream();
+            var writer = ProtoWriter.State.Create(ms, typeModel);
+            writer.WriteFieldHeader(order, WireType.Varint);
+            writer.WriteUInt32(value);
+            writer.Flush();
+            ms.Position = 0;
+            var data = ms.ToArray();
+            ms.Close();
+            ms.Dispose();
+            ms = null;
+
+            Print(order);
+
+            void Print(int i)
+            {
+                Console.WriteLine($"Order：{i.ToString()}, Value: {value.ToString()}, Data: {BitConverter.ToString(data)}");
+            }
+        }
+
+        /// <summary>
+        /// 获取无符号整型
+        /// </summary>
+        /// <param name="value">值</param>
+        /// <param name="precision">精度</param>
+        /// <param name="order">ProtoBuf序列号</param>
+        /// <returns></returns>
+        private static byte[] FromUint32(object value, int precision, int order)
+        {
+            uint v = default;
+            if (value is double d || double.TryParse(value.ToString(), out d))
+            {
+                if (precision != 0)
+                    v = (uint)(d * Math.Pow(10, -precision));
+            }
+            else if (value is uint v1 || uint.TryParse(value.ToString(), out v1))
+            {
+                if (precision != 0)
+                    v = (uint)(v1 * Math.Pow(10, -precision));
+            }
+            else
+                return null;
+
+            return ProtoBufSerializer.GetData(v, order);
+        }
+
+        /// <summary>
+        /// 获取布尔类型
+        /// </summary>
+        /// <param name="value">值</param>
+        /// <param name="order">ProtoBuf序列号</param>
+        /// <returns></returns>
+        private static byte[] FromBool(object value, int order)
+        {
+            var sValue = value.ToString();
+            if (int.TryParse(sValue, out var i))
+            {
+                if (i == 1 || i == 0)
+                    return ProtoBufSerializer.GetData(i == 1, order);
+                return null;
+            }
+            if (value is bool b || bool.TryParse(sValue, out b))
+                return ProtoBufSerializer.GetData(b, order);
+
+            return null;
         }
 
         [ProtoContract]

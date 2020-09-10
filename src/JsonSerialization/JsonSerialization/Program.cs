@@ -15,10 +15,25 @@ namespace JsonSerialization
     {
         static void Main(string[] args)
         {
-            SpecialNodeNameSerialization();
+            SerializationEnum();
 
             Console.ReadLine();
         }
+
+        #region 序列化枚举
+
+        private static void SerializationEnum()
+        {
+            var settings = new Settings() { Options = Options.Value3 };
+            var json = JsonConvert.SerializeObject(settings);
+
+            Console.WriteLine(json);
+
+            var model = JsonConvert.DeserializeObject<Settings>(json);
+            Console.WriteLine(model.Options);
+        }
+
+        #endregion
 
         #region 特殊节点名序列化
 
