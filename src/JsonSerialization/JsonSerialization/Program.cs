@@ -15,10 +15,30 @@ namespace JsonSerialization
     {
         static void Main(string[] args)
         {
-            SerializationEnum();
+            NullableEnum();
 
             Console.ReadLine();
         }
+
+        #region 可空枚举
+
+        /// <summary>
+        /// 可空枚举
+        /// </summary>
+        static void NullableEnum()
+        {
+            using (var fs = new FileStream("Text/AIGarbageClassify1.json", FileMode.Open, FileAccess.Read))
+            using (var sr = new StreamReader(fs))
+            {
+                var json = sr.ReadToEnd();
+
+                var model = JsonConvert.DeserializeObject<ApiModel<Alarm>>(json);
+
+                Console.WriteLine(model.GetType());
+            }
+        }
+
+        #endregion
 
         #region 序列化枚举
 

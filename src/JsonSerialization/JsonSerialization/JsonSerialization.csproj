@@ -82,6 +82,8 @@
     <Compile Include="JsonConverters\StandardDateTimeConverter.cs" />
     <Compile Include="JsonConverters\NoDelimiterDateTimeConverter.cs" />
     <Compile Include="JsonConverters\UtcDateTimeConverter.cs" />
+    <Compile Include="Model\AIGarbage\Alarm.cs" />
+    <Compile Include="Model\AIGarbage\ApiModel.cs" />
     <Compile Include="Model\HycCharge\Enums\HycDeviceType.cs" />
     <Compile Include="Model\HycCharge\Enums\HycGetDevicesResponse.cs" />
     <Compile Include="Model\HycCharge\Enums\HycOnlineStatus.cs" />
@@ -112,6 +114,12 @@
     <Compile Include="Model\TradeTrendModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="Text\AIGarbageClassify1.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Text\AIGarbageClassify.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Text\HycSearchTaskResultResponse.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

@@ -11,13 +11,14 @@ namespace JsonSerialization
     /// <typeparam name="T"></typeparam>
     public class EnumJsonConvert : JsonConverter
     {
-        public override bool CanConvert(Type objectType)
-        {
-            return true;
-        }
+        public override bool CanConvert(Type objectType) => true;
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
+            // 若未定义，使用默认值
+            if (null == reader.Value || !Enum.IsDefined(objectType, reader.Value))
+                return Activator.CreateInstance(objectType);
+
             return Enum.Parse(objectType, reader.Value.ToString());
         }
 
