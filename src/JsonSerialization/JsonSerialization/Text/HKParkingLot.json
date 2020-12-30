@@ -1,0 +1,27 @@
+{
+  "code": 0,
+  "total": 2,
+  "roadWay": [
+    {
+      "laneCode": "4357605E014A85A5EF45_1",
+      "name": "北门入口",
+      "type": 1,
+      "releaseMode": "0,1",
+      "autoRelease": "1,3,5"
+    },
+    {
+      "laneCode": "4357605E014A85A5EF45_2",
+      "name": "北门出口",
+      "type": 2,
+      "releaseMode": "",
+      "autoRelease": "1"
+    },
+    {
+      "laneCode ": "4357605E014A85A5EF45_3",
+      "name": "东门收费出口",
+      "type": 3,
+      "releaseMode": "0",
+      "autoRelease": ""
+    }
+  ]
+}

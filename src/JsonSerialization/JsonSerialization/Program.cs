@@ -15,10 +15,30 @@ namespace JsonSerialization
     {
         static void Main(string[] args)
         {
-            NullableEnum();
+            KeyValueArray();
 
             Console.ReadLine();
         }
+
+        #region 键值对数组
+
+        private static void KeyValueArray()
+        {
+            var model = new KeyValueModel();
+            model.Parameters = new List<KeyValuePair<string, string>>
+            {
+                new KeyValuePair<string, string>("121", "dsadsa"),
+                new KeyValuePair<string, string>("122", "dsadsa"),
+                new KeyValuePair<string, string>("123", "dsadsa"),
+            };
+            var json = JsonConvert.SerializeObject(model);
+            Console.WriteLine(json);
+
+            var obj = JsonConvert.DeserializeObject<KeyValueModel>(json);
+            Console.WriteLine(obj.Parameters.Count);
+        }
+
+        #endregion
 
         #region 可空枚举
 
