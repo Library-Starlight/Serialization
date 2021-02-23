@@ -15,7 +15,7 @@ namespace JsonSerialization
     {
         static void Main(string[] args)
         {
-            KeyValueArray();
+            CustomDateTimeConverter();
 
             Console.ReadLine();
         }
